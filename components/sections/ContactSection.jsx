@@ -83,7 +83,7 @@ const ContactSection = () => {
       icon: <LinkedInSvg />,
       label: ct.linkedIn,
       value: 'nemanja-nakomcic',
-      href: 'https://linkedin.com/in/nemanja-nakomcic-4596313ab/',
+      href: 'https://linkedin.com/in/nemanja-nakomcic/',
     },
     {
       icon: <GitHubSvg />,
@@ -110,7 +110,6 @@ const ContactSection = () => {
 
       <div className="relative z-10 max-w-300 mx-auto px-5 md:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          {/* Left — info + links */}
           <motion.div
             className="flex flex-col gap-8"
             variants={staggerContainer(0.1)}
@@ -181,7 +180,6 @@ const ContactSection = () => {
             </AnimatedSection>
           </motion.div>
 
-          {/* Right — form */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
