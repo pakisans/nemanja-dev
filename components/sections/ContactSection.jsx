@@ -78,7 +78,7 @@ const ContactSection = () => {
       icon: <UpWorkIcon />,
       label: ct.upWork,
       value: 'Upwork Profile',
-      href: 'https://www.upwork.com/freelancers/~019831941e2732296c',
+      href: 'https://www.upwork.com/freelancers/nemanjanakomcic',
       onTrack: () => trackEvent('click_upwork', { location: 'contact' }),
     },
   ];
