@@ -11,6 +11,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import Button from '@/components/ui/Button';
 import LogoIcon from '../icons/LogoIcon';
 import ScrollProgress from '@/components/ui/ScrollProgress';
+import { trackEvent } from '@/lib/analytics';
 
 const NAV_SECTIONS = ['about', 'skills', 'experience', 'projects', 'contact'];
 
@@ -89,6 +90,7 @@ const Header = () => {
               download="Nemanja-Nakomcic-CV.pdf"
               className="hidden md:inline-flex py-2! px-4! text-xs! rounded-lg!"
               aria-label="Download CV"
+              onClick={() => trackEvent('click_cv_download', { location: 'header' })}
             >
               {t.nav.downloadCV}
             </Button>
@@ -143,6 +145,7 @@ const Header = () => {
                   href="/cv/nemanja-nakomcic-cv.pdf"
                   download="Nemanja-Nakomcic-CV.pdf"
                   className="w-full"
+                  onClick={() => trackEvent('click_cv_download', { location: 'mobile_menu' })}
                 >
                   {t.nav.downloadCV}
                 </Button>

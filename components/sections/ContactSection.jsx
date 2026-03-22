@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import AnimatedItem from '@/components/ui/AnimatedItem';
 import { fadeUp, staggerContainer, viewportOnce } from '@/lib/animations';
+import { trackEvent } from '@/lib/analytics';
 import Link from 'next/link';
 import UpWorkIcon from '../icons/UpWorkIcon';
 import GithubIcon from '../icons/GithubIcon';
@@ -42,7 +43,10 @@ const ContactSection = () => {
         body: JSON.stringify(form),
       });
       setStatus(res.ok ? 'success' : 'error');
-      if (res.ok) setForm({ name: '', email: '', subject: '', message: '' });
+      if (res.ok) {
+        setForm({ name: '', email: '', subject: '', message: '' });
+        trackEvent('contact_submit', { location: 'contact' });
+      }
     } catch {
       setStatus('error');
     }
@@ -54,24 +58,28 @@ const ContactSection = () => {
       label: ct.emailLabel,
       value: ct.email,
       href: `mailto:${ct.email}`,
+      onTrack: () => trackEvent('click_email', { location: 'contact' }),
     },
     {
       icon: <LinkedInIcon />,
       label: ct.linkedIn,
       value: 'nemanja-nakomcic',
       href: 'https://linkedin.com/in/nemanja-nakomcic/',
+      onTrack: () => trackEvent('click_linkedin', { location: 'contact' }),
     },
     {
       icon: <GithubIcon />,
       label: ct.gitHub,
       value: 'pakisans',
       href: 'https://github.com/pakisans',
+      onTrack: () => trackEvent('click_github', { location: 'contact' }),
     },
     {
       icon: <UpWorkIcon />,
       label: ct.upWork,
       value: 'Upwork Profile',
       href: 'https://www.upwork.com/freelancers/~019831941e2732296c',
+      onTrack: () => trackEvent('click_upwork', { location: 'contact' }),
     },
   ];
 
@@ -133,7 +141,7 @@ const ContactSection = () => {
               staggerDelay={0.1}
               className="flex flex-col gap-3"
             >
-              {links.map(({ icon, label, value, href }) => (
+              {links.map(({ icon, label, value, href, onTrack }) => (
                 <AnimatedItem key={label}>
                   <Link
                     href={href}
@@ -143,6 +151,7 @@ const ContactSection = () => {
                         ? undefined
                         : 'noopener noreferrer'
                     }
+                    onClick={onTrack}
                     className="group flex items-center gap-4 p-4 rounded-xl border border-border hover:border-[rgba(129,140,248,0.3)] bg-surface hover:bg-surface-2 transition-all duration-300"
                   >
                     <span className="w-10 h-10 rounded-xl bg-surface-2 border border-border flex items-center justify-center text-text-muted group-hover:text-accent group-hover:border-[rgba(129,140,248,0.3)] transition-all duration-300 shrink-0">
